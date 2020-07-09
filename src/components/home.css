@@ -1,3 +1,15 @@
 .canvas {
-    
+    background: white;
+    border: solid;
+    border-width: 2px;
+    border-color: gray;
+    /* width: 400px;
+    height: 400px; */
 }
+/* .attr("width", width)
+            .attr("height", height)
+            .attr("x", width/2)
+            .attr("y", height/2)
+            .style("background", "white")
+            .style("border-width", "2px")
+            .style("border-color", "gray") */

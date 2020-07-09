@@ -49,35 +49,13 @@ export default class Physics{
         p2.speedx = p2_xnew;
         p2.speedy = p2_ynew;
 
-
         p1.collided = true;
         p2.collided = true;
 
-        // p1.x += .25 * Math.cos(angleOfImpact)
-        // p1.y += .25 * Math.sin(angleOfImpact)
-        // p2.x -= .25 * Math.cos(angleOfImpact)
-        // p2.y -= .25 * Math.sin(angleOfImpact)
-
-        p1.x += (p1.x > p2.x);
-        p1.y += (p1.y > p2.y);
-        p2.x += (p1.x < p2.x);
-        p2.y += (p1.y < p2.y);
-
-        // if( p1.x > p2.x ) {
-        //     if( p1.y > p2.y ) {
-        //         p1.x += .25 * Math.cos(angleOfImpact)
-
-        //     } else {
-
-        //     }
-        // }
-        // else {
-        //     if( p1.y > p2.y ) {
-
-        //     } else {
-
-        //     }
-        // }
+        p1.x += (p1.x > p2.x)*.5;
+        p1.y += (p1.y > p2.y)*.5;
+        p2.x += (p1.x < p2.x)*.5;
+        p2.y += (p1.y < p2.y)*.5;
 
     }
 }

@@ -2,7 +2,7 @@ import Rectangle from './rectangle.js'
 import Physics from './physics.js'
 
 export default class QuadTree {
-    constructor(boundary, n) {
+    constructor(boundary, n, dot_radius) {
         this.boundary = boundary;
         this.capacity = n;
         this.points = [];
@@ -12,6 +12,7 @@ export default class QuadTree {
         this.count_rec = 0;
         this.count_dead = 0;
         this.count_vac = 0;
+        this.dot_radius = dot_radius
     }
 
     subdivide() {
@@ -21,13 +22,13 @@ export default class QuadTree {
         let h = this.boundary.h;
 
         let ne = new Rectangle(x + w/2, y - h/2, w/2, h/2);
-        this.northeast = new QuadTree(ne, this.capacity);
+        this.northeast = new QuadTree(ne, this.capacity, this.dot_radius);
         let nw = new Rectangle(x - w/2, y - h/2, w/2, h/2);
-        this.northwest = new QuadTree(nw, this.capacity);
+        this.northwest = new QuadTree(nw, this.capacity, this.dot_radius);
         let se = new Rectangle(x + w/2, y + h/2, w/2, h/2);
-        this.southeast = new QuadTree(se, this.capacity);
+        this.southeast = new QuadTree(se, this.capacity, this.dot_radius);
         let sw = new Rectangle(x - w/2, y + h/2, w/2, h/2);
-        this.southwest = new QuadTree(sw, this.capacity);
+        this.southwest = new QuadTree(sw, this.capacity, this.dot_radius);
 
         this.divided = true;
     }
@@ -98,6 +99,7 @@ export default class QuadTree {
     }
 
     checkCollision(width, height) {
+        let dot_radius = this.dot_radius
         if(this.divided) {
             this.northeast.checkCollision(width, height);
             this.northwest.checkCollision(width, height);
@@ -108,17 +110,17 @@ export default class QuadTree {
             for(let p of this.points) {
 
                 //check for wall collisions
-                if(p.x > width - 4) { p.speedx = -Math.abs(p.speedx) }
-                if(p.x < 4) { p.speedx = Math.abs(p.speedx) }
-                if(p.y > height - 4) { p.speedy = -Math.abs(p.speedy) }
-                if(p.y < 4) { p.speedy = Math.abs(p.speedy) }
+                if(p.x > width - dot_radius) { p.speedx = -Math.abs(p.speedx) }
+                if(p.x < dot_radius) { p.speedx = Math.abs(p.speedx) }
+                if(p.y > height - dot_radius) { p.speedy = -Math.abs(p.speedy) }
+                if(p.y < dot_radius) { p.speedy = Math.abs(p.speedy) }
 
                 for(let pcomp of this.points) { //check if colliding with any other points in this leaf node
                     if(p === pcomp || p.collided == true || pcomp.collided == true) { continue } //skip if they've already had a collision this frame
                     
                     //initiates collision if balls are close enough
                     if( Math.sqrt( Math.pow( Math.abs( p.x - pcomp.x ), 2 ) + 
-                                    Math.pow( Math.abs( p.y - pcomp.y ), 2) ) < 8.25 ) {
+                                    Math.pow( Math.abs( p.y - pcomp.y ), 2) ) < 2*dot_radius ) {
                         // let tempx = p.speedx;
                         // let tempy = p.speedy;
                         // p.speedx = pcomp.speedx;

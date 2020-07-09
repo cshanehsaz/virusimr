@@ -1,26 +1,31 @@
 import React from 'react';
-import Virusim from '../sim/sketch.js'
+//import Virusim from '../sim/sketch.js'
 import Rectangle from '../sim/rectangle.js';
 import QuadTree from '../sim/quadtree.js'
 import Point from '../sim/point.js'
+import './home.css'
 
 class Home extends React.Component {
     constructor(props) {
       super(props);
+
+      let { width, height, number_nodes, number_infected_start,
+            number_vaccinated_start, velocity_scale } = this.props
+
       this.state = {
           //params
           time: 0,
           timeStep: 1,
-          width : 400,
-          height : 400,
-          number_nodes : 100,
-          number_infected_start : 1,
-          number_vaccinated_start : 0,
-          dot_radius : 4,
-          fps : 120,
-          velocity_scale : .5,
-          center_x: 400/2,
-          center_y: 400/2,
+          width : width,
+          height : height,
+          number_nodes : number_nodes,
+          number_infected_start : number_infected_start,
+          number_vaccinated_start : number_vaccinated_start,
+          dot_radius : 2,
+          fps : 100,
+          velocity_scale : velocity_scale,
+          center_x: width/2,
+          center_y: height/2,
 
           //bounds
           boundary: null,
@@ -31,15 +36,20 @@ class Home extends React.Component {
     }
 
     componentWillMount() {
-        let {center_x, center_y, width, height, dot_radius, velocity_scale, number_nodes, } = this.state
+        let {center_x, center_y, width, height, dot_radius, velocity_scale, number_nodes, points,
+             number_infected_start, number_vaccinated_start } = this.state
         let boundary = new Rectangle(center_x, center_y, width/2, height/2)
-        let qt = new QuadTree(this.state.boundary, 8)
+
+        let qt = new QuadTree(boundary, 10, dot_radius)
 
         for(let i=0; i<number_nodes; i++) {
             let p = new Point(Math.random()*width, Math.random()*height, dot_radius, (Math.random()-.5)*velocity_scale, (Math.random()-.5)*velocity_scale);
             points.push(p);
             qt.insert(p);
         }
+
+        QuadTree.infectSetup(points, number_infected_start);
+        QuadTree.vaccinateSetup(points, number_vaccinated_start);
 
         this.setState({
             boundary: boundary,
@@ -48,26 +58,44 @@ class Home extends React.Component {
     }
 
     componentDidMount() {
-        let intervalInt = setInterval(function(){this.setState({time: this.state.time+1})}.bind(this), 1000)
-        this.setState({interval: intervalInt})
-    }
+        let { qt, timeStep, points, width, height, boundary, dot_radius, fps } = this.state
+        let intervalInt = setInterval(
+            function(){
+                // this.setState({time: this.state.time+1})}.bind(this)
+                // , 1000)
+            qt.advance(timeStep, points, width, height)
 
-    componentDidUpdate() {
-        console.log(this.state.boundary)
+            qt = new QuadTree(boundary, 10, dot_radius);
+            for(let p of points) {
+                qt.insert(p);
+            }
+
+            this.setState({
+                qt: qt,
+                points: points
+            })
+
+        }.bind(this), 1000/fps)
+
+        this.setState({
+            interval: intervalInt
+        })
     }
 
     componentWillUnmount() {
         clearInterval(this.state.interval)
     }
 
-    testFunc() {
-        this.setState({time: 1})
-    }
-
     render() {
-      return(
-        <p>{this.state.time}</p>
-      )
+        let { points } = this.state
+        return(
+            <>
+                <svg className="canvas" style={{height: this.state.height, width: this.state.width}}>
+                    {points.map(point =>
+                        <circle cx={point.x} cy={point.y} r={point.r} fill={point.color} />)}
+                </svg>  
+            </>
+        )
     }
 }
 
