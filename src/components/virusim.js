@@ -1,16 +1,15 @@
 import React from 'react';
-//import Virusim from '../sim/sketch.js'
 import Rectangle from '../sim/rectangle.js';
 import QuadTree from '../sim/quadtree.js'
 import Point from '../sim/point.js'
-import './home.css'
+import './virusim.css'
 
-class Home extends React.Component {
+class Virusim extends React.Component {
     constructor(props) {
       super(props);
 
       let { width, height, number_nodes, number_infected_start,
-            number_vaccinated_start, velocity_scale } = this.props
+            number_vaccinated_start, velocity_scale, number_masked_start } = this.props
 
       this.state = {
           //params
@@ -21,6 +20,7 @@ class Home extends React.Component {
           number_nodes : number_nodes,
           number_infected_start : number_infected_start,
           number_vaccinated_start : number_vaccinated_start,
+          number_masked_start : number_masked_start,
           dot_radius : 2,
           fps : 100,
           velocity_scale : velocity_scale,
@@ -31,13 +31,16 @@ class Home extends React.Component {
           boundary: null,
           qt: null,
           points: [],
+
+          //other
+          time: 0,
           
       }
     }
 
     componentWillMount() {
         let {center_x, center_y, width, height, dot_radius, velocity_scale, number_nodes, points,
-             number_infected_start, number_vaccinated_start } = this.state
+             number_infected_start, number_vaccinated_start, number_masked_start } = this.state
         let boundary = new Rectangle(center_x, center_y, width/2, height/2)
 
         let qt = new QuadTree(boundary, 10, dot_radius)
@@ -50,6 +53,8 @@ class Home extends React.Component {
 
         QuadTree.infectSetup(points, number_infected_start);
         QuadTree.vaccinateSetup(points, number_vaccinated_start);
+        console.log('setup: ' + number_masked_start)
+        QuadTree.maskSetup(points, number_masked_start);
 
         this.setState({
             boundary: boundary,
@@ -58,32 +63,38 @@ class Home extends React.Component {
     }
 
     componentDidMount() {
-        let { qt, timeStep, points, width, height, boundary, dot_radius, fps } = this.state
+        let { qt, timeStep, points, width, height, boundary, dot_radius, fps, time } = this.state
         let intervalInt = setInterval(
-            function(){
-                // this.setState({time: this.state.time+1})}.bind(this)
-                // , 1000)
-            qt.advance(timeStep, points, width, height)
+            function() {
+                qt.advance(timeStep, points, width, height)
 
-            qt = new QuadTree(boundary, 10, dot_radius);
-            for(let p of points) {
-                qt.insert(p);
-            }
+                qt = new QuadTree(boundary, 10, dot_radius);
+                for(let p of points) {
+                    qt.insert(p);
+                }
 
-            this.setState({
-                qt: qt,
-                points: points
-            })
+                this.setState({
+                    qt: qt,
+                    points: points
+                })
 
-        }.bind(this), 1000/fps)
+            }.bind(this), 1000/fps)
+
+        let timer = setInterval(
+            function() {
+                time++;
+                this.setState({time: time})
+            }.bind(this), 1000)
 
         this.setState({
-            interval: intervalInt
+            interval: intervalInt,
+            timer: timer
         })
     }
 
     componentWillUnmount() {
         clearInterval(this.state.interval)
+        clearInterval(this.state.timer)
     }
 
     render() {
@@ -92,30 +103,13 @@ class Home extends React.Component {
             <>
                 <svg className="canvas" style={{height: this.state.height, width: this.state.width}}>
                     {points.map(point =>
-                        <circle cx={point.x} cy={point.y} r={point.r} fill={point.color} />)}
+                        <circle cx={point.x} cy={point.y} r={point.r} fill={point.color} />
+                    )}
                 </svg>  
+                <p> Time: {this.state.time} </p>
             </>
         )
     }
 }
 
-export default Home;
-
-//border: solid; border-color: gray; border-width: 1px;
-
-// wipe() {
-//     d3.selectAll(".circle").remove();
-// }
-
-// circles(points) { 
-//     d3.select(".canvas")
-//     .selectAll(".circle")
-//     .data(points)
-//     .enter()
-//     .append("circle")
-//     .attr("cx", function(p) {return p.x})
-//     .attr("cy", function(p) {return p.y})
-//     .attr("r", function(p) {return p.r})
-//     .attr("fill", function(p) {return p.color})
-//     .attr("class", "circle")
-// }
+export default Virusim;

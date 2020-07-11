@@ -1,0 +1,38 @@
+.page {
+    min-width: 40%;
+    max-width: 90%;
+    width: 800px;
+    text-align: center;
+    margin: auto;
+    padding: 5%;
+    font-family: -apple-system, BlinkMacSystemFont, 'Noto Sans JP', 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    font-size: 15pt;
+}
+
+.page0 {
+    text-align: center;
+    margin: 0 auto;
+    padding-top: 10%;
+    font-family: -apple-system, BlinkMacSystemFont, 'Noto Sans JP', 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    font-size: 15pt;
+}
+
+.page1 {
+    min-width: 40%;
+    max-width: 90%;
+    width: 600px;
+    text-align: justify;
+    margin: auto;
+    padding: 5%;
+    font-family: -apple-system, BlinkMacSystemFont, 'Noto Sans JP', 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    font-size: 15pt;
+}
+
+.title {
+    font-family: Raleway;
+    text-align: left;
+    font-size: 23pt;
+}

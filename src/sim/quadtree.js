@@ -12,7 +12,8 @@ export default class QuadTree {
         this.count_rec = 0;
         this.count_dead = 0;
         this.count_vac = 0;
-        this.dot_radius = dot_radius
+        this.dot_radius = dot_radius;
+        this.mask_prob = .8;
     }
 
     subdivide() {
@@ -86,13 +87,24 @@ export default class QuadTree {
         this.count_vac=0;
     }
 
-    static checkTransmission(p1, p2) {
+    static checkTransmission(p1, p2, mask_prob) {
         if(p1.isInfected() || p2.isInfected()) {
             if(p1.isNotInfected() || p2.isNotInfected()) {
-                p1.infect();
-                p2.infect();
-                p1.updateColor();
-                p2.updateColor();
+                if(p1.isMasked() || p2.isMasked()) {
+                    console.log('mask!')
+                    if(Math.random() < mask_prob) {
+                        p1.infect();
+                        p2.infect();
+                        p1.updateColor();
+                        p2.updateColor();
+                    } else {return}
+                } else {
+                    p1.infect();
+                    p2.infect();
+                    p1.updateColor();
+                    p2.updateColor();
+                }
+                
             }
         }
         
@@ -133,7 +145,7 @@ export default class QuadTree {
                         // p.y += (p.y > pcomp.y)*2+-1;
                     
                         Physics.collision(p, pcomp)
-                        QuadTree.checkTransmission(p, pcomp);
+                        QuadTree.checkTransmission(p, pcomp, this.mask_prob);
                         p.recover();
                     }
                 }
@@ -180,6 +192,19 @@ export default class QuadTree {
                 number_vaccinated++
             }
 
+        }
+    }
+
+    static maskSetup(points, number) {
+        let number_masks = 0;
+        console.log('num masks: ' + number)
+        for (let p of points) {
+            if(number_masks >= number){return}
+            else {
+                console.log('mask setup')
+                p.maskOn()
+                number_masks++;
+            }
         }
     }
 

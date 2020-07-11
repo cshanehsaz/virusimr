@@ -1,68 +1,97 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Home from './components/home.js'
+import Virusim from './components/virusim.js'
 import Slide from 'react-reveal/Slide'
+import Page0 from './components/page0.js'
+import Page1 from './components/page1.js'
+import Page2 from './components/page2.js'
+import Page3 from './components/page3.js'
+import Page4 from './components/page4.js'
+import Page5 from './components/page5.js'
+import Page6 from './components/page6.js'
 
 class App extends React.Component {
   constructor() {
     super()
     this.state = {
-      page: 2,
+      page: 0,
       interval: null
     }
+
+    this._onClick = this._onClick.bind(this)
   }
 
-  componentDidMount() {
-    let interval = setInterval(
-      function() {
-        console.log(this.state.page)
-        if(this.state.page < 2) {this.setState({page: this.state.page+1})}
-        
-      }.bind(this), 2000)
-
-    this.setState({interval: interval})
+  _onClick() {
+    this.setState({page: this.state.page===6 ? 0 : this.state.page + 1})
   }
 
   render() {
-    if(this.state.page === 0) {
-      return(
-        <p>loading</p>
-      )
-    }
 
-    if(this.state.page === 1) {
-      return (
-        <div className="App">
-            <Slide left>
-              <Home width={300} height={300} number_nodes={100} number_infected_start={10}
-                    number_vaccinated_start={0} velocity_scale={.5}/>
-              <Home width={400} height={200} number_nodes={100} number_infected_start={10}
-                    number_vaccinated_start={0} velocity_scale={.5} />
-            </Slide>
-        </div>
-      );
-    }
+    switch(this.state.page) {
+      case 0:
+        return(
+          <div className="backdrop">
+            <div style={{
+            position: 'absolute', left: '50%', top: '50%',
+            transform: 'translate(-50%, -50%)'
+            }}>
+              <Page0 />
+              <button onClick={this._onClick} > Boop doop </button>
+          </div>
+          </div>
+          
+          )
 
-    if(this.state.page === 2) {
-      return (
-        <div className="App">
-            <Slide right>
-              <Home width={300} height={300} number_nodes={100} number_infected_start={10}
-                    number_vaccinated_start={0} velocity_scale={.5}/>
-              <Home width={400} height={200} number_nodes={100} number_infected_start={10}
-                    number_vaccinated_start={0} velocity_scale={.5} />
-            </Slide>
+      case 1:
+        return(
+        <div className="backdrop">
+          <Page1 />
+          <button onClick={this._onClick} > Boop doop </button>
         </div>
-      );
+        )
+
+      case 2:
+        return(
+        <div className="backdrop">
+          <Page2 />
+          <button onClick={this._onClick} > Boop doop </button>
+        </div>
+        )
+
+      case 3:
+        return(
+        <div className="backdrop">
+          <Page3 />
+          <button onClick={this._onClick} > Boop doop </button>
+        </div>
+        )  
+
+      case 4:
+        return(
+        <div className="backdrop">
+          <Page4 />
+          <button onClick={this._onClick} > Boop doop </button>
+        </div>
+        )
+
+      case 5:
+        return(
+        <div className="backdrop">
+          <Page5 />
+          <button onClick={this._onClick} > Boop doop </button>
+        </div>
+        )
+      case 6:
+        return(
+        <div className="backdrop">
+          <Page6 />
+          <button onClick={this._onClick} > Boop doop </button>
+        </div>
+        )
     }
-    
   }
 }
   
 
 export default App;
-
-
-// width, height, number_nodes, number_infected_start,
-//             number_vaccinated_start, velocity_scale

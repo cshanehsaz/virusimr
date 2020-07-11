@@ -1,8 +1,9 @@
 .canvas {
     background: white;
     border: solid;
-    border-width: 2px;
+    border-width: 1px;
     border-color: gray;
+    align-self: center;
     /* width: 400px;
     height: 400px; */
 }

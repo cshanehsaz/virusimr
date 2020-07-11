@@ -8,6 +8,8 @@ export default class Point {
         this.collided = false
         this.status = 'not' //statuses: not, inf, rec, dead, vac
         this.timeInfected = 0
+        this.color = null;
+        this.mask = false;
         this.updateColor()
     
         //this.color = color(Math.random()*255,Math.random()*255,Math.random()*255) //makes all random colors for testing
@@ -18,7 +20,7 @@ export default class Point {
         if(this.isNotInfected()) {this.color = "#0AD48B"}
         else if(this.isInfected()) {this.color = "#C70039"}
         else if(this.isRecovered()) {this.color = "#004785"}
-        else if(this.isDead()) {this.color = "#581845"}
+        else if(this.isDead()) {this.color = "#FF9933"}
         else if(this.isVaccinated()) {this.color = "#C0C0C0"}
     }
 
@@ -43,6 +45,10 @@ export default class Point {
         else {return false}
     }
 
+    isMasked() {
+        return(this.mask)
+    }
+
     infect() {this.status = 'inf'}
 
     recover() {
@@ -57,4 +63,6 @@ export default class Point {
     }
     
     vaccinate() {this.status='vac'}
+
+    maskOn() {this.mask = true}
 }
