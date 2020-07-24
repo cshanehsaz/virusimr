@@ -64,33 +64,3 @@
     grid-template-columns: auto auto;
     max-width: 80%;
 }
-
-.customsim-inputs {
-    text-align: left;
-    display: grid;
-    grid-template-columns: auto auto;
-    grid-template-rows: auto auto;
-    font-size: 12pt;
-}
-
-.customsim-inputs-col1 {
-    grid-column: 1;
-    grid-row: 1;
-    text-align: center;
-}
-
-.customsim-inputs-individual {
-    padding: 5px;
-}
-
-.customsim-inputs-col2 {
-    grid-column: 2;
-    grid-row: 1;
-    text-align: center;
-}
-
-.customsim-submit {
-    grid-column: 1/3;
-    grid-row: 2;
-    text-align: center;
-}

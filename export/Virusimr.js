@@ -1,8 +1,5 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import Virusim from './components/virusim.js'
-import Slide from 'react-reveal/Slide'
 import Page0 from './components/page0.js'
 import Page1 from './components/page1.js'
 import Page2 from './components/page2.js'
@@ -11,11 +8,11 @@ import Page4 from './components/page4.js'
 import Page5 from './components/page5.js'
 import Page6 from './components/page6.js'
 
-class App extends React.Component {
+export default class Virusimr extends React.Component {
   constructor() {
     super()
     this.state = {
-      page: 0,
+      page: 2,
       interval: null
     }
 
@@ -29,6 +26,10 @@ class App extends React.Component {
   render() {
 
     switch(this.state.page) {
+
+      default:
+        return
+
       case 0:
         return(
           <div className="backdrop">
@@ -92,6 +93,3 @@ class App extends React.Component {
     }
   }
 }
-  
-
-export default App;

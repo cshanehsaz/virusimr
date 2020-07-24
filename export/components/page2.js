@@ -12,10 +12,10 @@ class Page2 extends React.Component {
                     We have 100 people and 2 infected. </p>
                 <div className="sim">
                     <Virusim width={400} height={300} number_nodes={100} number_infected_start={2}
-                        number_vaccinated_start={0} velocity_scale={4} number_masked_start={0}
-                        infectionDuration={8} lethalityRate={5}/>
+                        number_vaccinated_start={0} velocity_scale={1.5} number_masked_start={0}/>
                 </div>
                 <p> It doesn't take long at all to infect almost the entire population. </p>
+                <p> Pssst. Hi Jill :) Hit boop doop in the bottom left to go to next page, but it's all pretty much the same</p>
             </div>
             
         )

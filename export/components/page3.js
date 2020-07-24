@@ -11,8 +11,7 @@ class Page3 extends React.Component {
                 <p> In urban areas, it's even worse. </p>
                 <div className="sim">
                     <Virusim width={400} height={300} number_nodes={300} number_infected_start={2}
-                        number_vaccinated_start={0} velocity_scale={4} number_masked_start={0}
-                        infectionDuration={8} lethalityRate={5}/>
+                        number_vaccinated_start={0} velocity_scale={1.5} number_masked_start={0}/>
                 </div>
             </div>
             

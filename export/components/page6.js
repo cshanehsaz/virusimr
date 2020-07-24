@@ -11,8 +11,7 @@ class Page6 extends React.Component {
                 <p> On top of social distancing, what about if everyone wears a mask that decreases the transmission rate by 20%? </p>
                 <div className="sim">
                     <Virusim width={600} height={500} number_nodes={100} number_infected_start={2}
-                        number_vaccinated_start={0} velocity_scale={4} number_masked_start={0}
-                        infectionDuration={8} lethalityRate={5}/>
+                        number_vaccinated_start={0} velocity_scale={1.5} number_masked_start={0}/>
                 </div>
                 <p> It's unbelievable. </p>
             </div>

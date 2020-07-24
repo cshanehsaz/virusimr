@@ -1,0 +1,9 @@
+.canvas {
+    background: white;
+    border: solid;
+    border-width: 1px;
+    border-color: gray;
+    align-self: center;
+    grid-column-start: 1;
+    grid-column-end: 1;
+}

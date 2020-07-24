@@ -51,11 +51,11 @@ export default class Point {
 
     infect() {this.status = 'inf'}
 
-    recover(infectionDuration, lethalityRate, fps) {
+    recover() {
         if(!this.isInfected()) {return}
-        else if(this.isInfected() && this.timeInfected < infectionDuration * fps) {this.timeInfected++}
+        else if(this.isInfected() && this.timeInfected < 600) {this.timeInfected++}
         else {
-            if(Math.random()*100 < 100-lethalityRate) {
+            if(Math.random() < .9) {
                 this.status='rec'
             } else {this.status='dead'}
             this.updateColor()

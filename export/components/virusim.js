@@ -11,8 +11,7 @@ export default class Virusim extends React.Component {
       super(props);
 
       let { width, height, number_nodes, number_infected_start,
-            number_vaccinated_start, velocity_scale, number_masked_start,
-            infectionDuration, lethalityRate } = this.props
+            number_vaccinated_start, velocity_scale, number_masked_start } = this.props
 
       this.state = {
           //params
@@ -24,12 +23,10 @@ export default class Virusim extends React.Component {
           number_vaccinated_start : number_vaccinated_start,
           number_masked_start : number_masked_start,
           dot_radius : 2,
-          fps : 42,
+          fps : 40,
           velocity_scale : velocity_scale,
           center_x: width/2,
           center_y: height/2,
-          infectionDuration: infectionDuration,
-          lethalityRate: lethalityRate,
 
           //bounds
           boundary: null,
@@ -38,19 +35,16 @@ export default class Virusim extends React.Component {
 
           //other
           time: 0,
-          dataStep: 1000,
           
       }
     }
 
     componentWillMount() {
         let {center_x, center_y, width, height, dot_radius, velocity_scale, number_nodes, points,
-             number_infected_start, number_vaccinated_start, number_masked_start,
-             infectionDuration, lethalityRate } = this.state
-
+             number_infected_start, number_vaccinated_start, number_masked_start } = this.state
         let boundary = new Rectangle(center_x, center_y, width/2, height/2)
 
-        let qt = new QuadTree(boundary, 6, dot_radius, infectionDuration, lethalityRate)
+        let qt = new QuadTree(boundary, 6, dot_radius)
 
         for(let i=0; i<number_nodes; i++) {
             let p = new Point(Math.random()*width, Math.random()*height, dot_radius, (Math.random()-.5)*velocity_scale, (Math.random()-.5)*velocity_scale);
@@ -71,13 +65,12 @@ export default class Virusim extends React.Component {
     }
 
     componentDidMount() {
-        let { qt, timeStep, points, width, height, boundary, dot_radius, fps, time, dataStep,
-              infectionDuration, lethalityRate } = this.state
+        let { qt, timeStep, points, width, height, boundary, dot_radius, fps, time } = this.state
         let intervalInt = setInterval(
             function() {
-                qt.advance(timeStep, points, width, height, fps)
+                qt.advance(timeStep, points, width, height)
 
-                qt = new QuadTree(boundary, 6, dot_radius, infectionDuration, lethalityRate);
+                qt = new QuadTree(boundary, 6, dot_radius);
                 for(let p of points) {
                     qt.insert(p);
                 }
@@ -91,11 +84,12 @@ export default class Virusim extends React.Component {
 
             }.bind(this), 1000/fps)
 
+        let step = 200
         let timer = setInterval(
             function() {
-                time = time+dataStep/1000;
+                time = time+step/1000;
                 this.setState({time: time})
-            }.bind(this), dataStep)
+            }.bind(this), step)
 
         this.setState({
             interval: intervalInt,

@@ -2,7 +2,7 @@ import Rectangle from './rectangle.js'
 import Physics from './physics.js'
 
 export default class QuadTree {
-    constructor(boundary, n, dot_radius, infectionDuration, lethalityRate) {
+    constructor(boundary, n, dot_radius) {
         this.boundary = boundary;
         this.capacity = n;
         this.points = [];
@@ -14,8 +14,6 @@ export default class QuadTree {
         this.count_vac = 0;
         this.dot_radius = dot_radius;
         this.mask_prob = .8;
-        this.infectionDuration = infectionDuration;
-        this.lethalityRate = lethalityRate;
     }
 
     subdivide() {
@@ -130,14 +128,25 @@ export default class QuadTree {
                 if(p.y < dot_radius) { p.speedy = Math.abs(p.speedy) }
 
                 for(let pcomp of this.points) { //check if colliding with any other points in this leaf node
-                    if(p === pcomp || p.collided === true || pcomp.collided === true) { continue } //skip if they've already had a collision this frame
+                    if(p === pcomp || p.collided == true || pcomp.collided == true) { continue } //skip if they've already had a collision this frame
                     
                     //initiates collision if balls are close enough
                     if( Math.sqrt( Math.pow( Math.abs( p.x - pcomp.x ), 2 ) + 
-                                    Math.pow( Math.abs( p.y - pcomp.y ), 2) ) < 2*dot_radius ) {                    
+                                    Math.pow( Math.abs( p.y - pcomp.y ), 2) ) < 2*dot_radius ) {
+                        // let tempx = p.speedx;
+                        // let tempy = p.speedy;
+                        // p.speedx = pcomp.speedx;
+                        // p.speedy = pcomp.speedy;
+                        // pcomp.speedx = tempx;
+                        // pcomp.speedy = tempy;
+                        // p.collided = true;
+                        // pcomp.collided = true;
+                        // p.x += (p.x > pcomp.x)*2+-1;
+                        // p.y += (p.y > pcomp.y)*2+-1;
+                    
                         Physics.collision(p, pcomp)
                         QuadTree.checkTransmission(p, pcomp, this.mask_prob);
-                        //p.recover(this.infectionDuration, this.lethalityRate);
+                        p.recover();
                     }
                 }
             }
@@ -148,14 +157,14 @@ export default class QuadTree {
         }
     }
 
-    advance(timeStep, points, width, height, fps) {
+    advance(timeStep, points, width, height) {
         this.resetCount();
         this.countPoints(points);
         this.checkCollision(width, height);
         for(let p of points){
             p.x += p.speedx * timeStep;
             p.y += p.speedy * timeStep;
-            p.recover(this.infectionDuration, this.lethalityRate, fps);
+            p.recover();
         }
         
     }
