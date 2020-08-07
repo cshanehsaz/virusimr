@@ -16,12 +16,12 @@ class Page1 extends React.Component {
                 <button className="page1-button" onClick = {this.props.onClickHelper}> Next </button>
 
                 <div style={{fontSize: '8pt', paddingTop: '0px'}}>
-                    <p> Notes: 
+                    <p style={{marginBottom: '5px'}}> Notes: 
                     </p>
-                    <p> • This is <b>NOT</b> a scientifically accurate model. It is a simulation intended to help people
+                    <p style={{marginBottom: '5px'}}> • This is <b>NOT</b> a scientifically accurate model. It is a simulation intended to help people
                         understand the facts more effectively.
                     </p>
-                    <p> • These are live, randomized simulations and you will get varied results. I encourage you to watch 
+                    <p style={{marginBottom: '5px'}}> • These are live, randomized simulations and you will get varied results. I encourage you to watch 
                         multiple times!
                     </p>
                     <p style={{marginBottom: '0'}}> • Thanks to Harry Stevens at the Washington Post for inspiration for this visualization.

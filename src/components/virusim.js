@@ -61,7 +61,6 @@ export default class Virusim extends React.Component {
 
         QuadTree.infectSetup(points, number_infected_start);
         QuadTree.vaccinateSetup(points, number_vaccinated_start);
-        console.log('setup: ' + number_masked_start)
         QuadTree.maskSetup(points, number_masked_start);
         qt.countPoints(points)
 

@@ -187,11 +187,9 @@ export default class QuadTree {
 
     static maskSetup(points, number) {
         let number_masks = 0;
-        console.log('num masks: ' + number)
         for (let p of points) {
             if(number_masks >= number){return}
             else {
-                console.log('mask setup')
                 p.maskOn()
                 number_masks++;
             }

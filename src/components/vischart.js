@@ -5,7 +5,7 @@ import {XYPlot, XAxis, YAxis, HorizontalGridLines, AreaSeries} from 'react-vis';
 export default class AreaChart extends React.PureComponent {
     constructor(props) {
       super(props);
-      let { healthy, inf, rec, dead, vac, time } = this.props;
+      let { healthy, inf, rec, dead, vac } = this.props;
 
 
       this.state = {

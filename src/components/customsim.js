@@ -32,7 +32,6 @@ export default class CustomSim extends React.Component {
         let temp = this.state
         temp[e.target.id] = Number(e.target.value);
         this.setState({temp: temp})
-        console.log(e.target.id)
     }
 
     onSubmit(e) {
@@ -64,7 +63,7 @@ export default class CustomSim extends React.Component {
 
         return (
             <div className="page">
-                <p>Your turn! Feel free to customize the simulation!</p>
+                <p style={{marginBottom: '10px'}}>Your turn! Feel free to customize the simulation!</p>
                 <div className="sim">
                     <Virusim 
                         width={width} height={height} number_nodes={number_nodes} 
