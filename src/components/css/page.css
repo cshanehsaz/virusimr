@@ -1,22 +1,27 @@
 .page {
     min-width: 40%;
     max-width: 90%;
-    width: 800px;
-    text-align: center;
+    width: 650px;
+    text-align: justify;
     margin: auto;
-    padding: 5%;
+    padding: 0;
+    padding-bottom: 0;
+    padding-top: 1.5%;
     font-family: -apple-system, BlinkMacSystemFont, 'Noto Sans JP', 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-    font-size: 15pt;
+    font-size: 11pt;
+    color: white;
 }
 
 .page0 {
     text-align: center;
-    margin: 0 auto;
-    padding-top: 10%;
+    margin: auto;
+    background-color: black;
     font-family: -apple-system, BlinkMacSystemFont, 'Noto Sans JP', 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
     font-size: 15pt;
+    width: 100%;
+    height: 100vh;
 }
 
 .page1 {
@@ -29,6 +34,7 @@
     font-family: -apple-system, BlinkMacSystemFont, 'Noto Sans JP', 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
     font-size: 15pt;
+    color: white;
 }
 
 .title {
@@ -45,6 +51,8 @@
 .chart {
     grid-column-start: 2;
     grid-column-end: 2;
+    width: 300px;
+    height: 250px;
 }
 
 .counter {
@@ -68,8 +76,8 @@
 .customsim-inputs {
     text-align: left;
     display: grid;
-    grid-template-columns: auto auto;
-    grid-template-rows: auto auto;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: auto auto auto;
     font-size: 12pt;
 }
 
@@ -79,18 +87,139 @@
     text-align: center;
 }
 
-.customsim-inputs-individual {
-    padding: 5px;
-}
-
 .customsim-inputs-col2 {
     grid-column: 2;
     grid-row: 1;
     text-align: center;
 }
 
+.customsim-inputs-individual {
+    padding: 5px;
+}
+
 .customsim-submit {
     grid-column: 1/3;
     grid-row: 2;
     text-align: center;
+}
+
+.customsim-submit-button {
+    border-radius: 5px;
+    border: solid;
+    border-color: gray;
+    border-width: 1px;
+    color: black;
+    background-color: white;
+    font-size: 3vh;
+}
+
+.beginButton {
+    position: absolute;
+    top: 80%;
+    left: 44.5%;
+    padding: 0;
+    padding-bottom: 3px;
+    background-color: black;
+    font-size: 10vh;
+    font-family: roboto;
+    color: white;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-bottom: solid;
+    border-color: white;
+    border-width: 2px;
+}
+
+.page1-button {
+    position: absolute;
+    top: 80vh;
+    left: 85%;
+    cursor: pointer;
+
+    font-size: 10vh;
+    background-color: black;
+    color: white;
+    border: 0;
+    outline: 0;
+    font-family: roboto;
+    padding: 0;
+}
+
+.page1-link {
+    font-size: 8pt;
+    padding-left: 5px;
+    color: gray;
+    text-decoration: none;
+}
+
+.restartButton {
+    cursor: pointer;
+    font-size: 10vh;
+    background-color: black;
+    color: white;
+    border: 0;
+    outline: 0;
+    font-family: roboto;
+    padding: 0;
+}
+
+.pageText-wrapper{
+    height: 15vh; 
+    max-height: 15vh;
+    font-size: 2.5vh;
+}
+
+.pageText {
+    margin: 0;
+}
+
+.rerun {
+    display: inline-flex;
+    width: auto;
+    position: absolute;
+    left: 5%;
+    top: 80vh;
+    cursor: pointer;
+    background-color: black;
+}
+
+.rerun-logo {
+    position: absolute;
+    left: 5%;
+    top: 81.25vh;
+    cursor: pointer;
+    height: 10vh;
+    width: 10vh;
+}
+
+.rerun-text {
+    margin: auto; 
+    padding-left: 5px;
+    font-size: 10vh;
+    font-family: roboto;
+}
+
+.customsim-input-box {
+    border-radius: 5px;
+    border: solid;
+    border-color: gray;
+    border-width: 1px;
+    width: 5vh;
+}
+
+.customsim-startover-button {
+    position: absolute;
+    top: 80vh;
+    left: 75%;
+    cursor: pointer;
+
+    width: 50vh;
+    font-size: 10vh;
+    background-color: black;
+    color: white;
+    border: 0;
+    outline: 0;
+    font-family: roboto;
+    padding: 0;
 }

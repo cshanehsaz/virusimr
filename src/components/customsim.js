@@ -15,8 +15,8 @@ export default class CustomSim extends React.Component {
             number_masked_start: 0,
             infectionDuration: 5,
             lethalityRate: 10,
-            width: 400,
-            height: 300,
+            width: 300,
+            height: 225,
             loading: false,
             fps: 42,
         }
@@ -74,22 +74,21 @@ export default class CustomSim extends React.Component {
                         infectionDuration={infectionDuration} lethalityRate={lethalityRate}
                     />
                 </div>
+                <div className="customsim-submit">
+                        <button className="customsim-submit-button" onClick={this.onSubmit}>Run new sim</button>
+                    </div>
                 <div className="customsim-inputs">
                     <div className="customsim-inputs-col1">
-                        <div className="customsim-inputs-individual"><label>Number of Nodes: <br/> <input id="number_nodes" type="text" value={number_nodes}onChange={this.onChangeHandler} ></input></label></div> 
-                        <div className="customsim-inputs-individual"><label>Number Infected: <br/> <input id="number_infected_start" type="text" value={number_infected_start} onChange={this.onChangeHandler} ></input></label></div>
-                        <div className="customsim-inputs-individual"><label>Number Vaccinated: <br/> <input id="number_vaccinated_start" type="text" value={number_vaccinated_start} onChange={this.onChangeHandler} ></input></label></div>
-                        <div className="customsim-inputs-individual"><label>Number Wearing Masks: <br/> <input id="number_masked_start" type="text" value={number_masked_start} onChange={this.onChangeHandler} ></input></label></div>
+                        <div className="customsim-inputs-individual"><label>Number of Balls: <input id="number_nodes" type="text" value={number_nodes} onChange={this.onChangeHandler} className='customsim-input-box'></input></label></div> 
+                        <div className="customsim-inputs-individual"><label>Number Infected: <input id="number_infected_start" type="text" value={number_infected_start} onChange={this.onChangeHandler} className='customsim-input-box'></input></label></div>
+                        <div className="customsim-inputs-individual"><label>Number Vaccinated: <input id="number_vaccinated_start" type="text" value={number_vaccinated_start} onChange={this.onChangeHandler} className='customsim-input-box'></input></label></div>
                     </div>
                     <div className="customsim-inputs-col2">
-                        <div className="customsim-inputs-individual"><label>Width (150-750): <br/> <input id="width" type="text" value={width} onChange={this.onChangeHandler} ></input></label></div>
-                        <div className="customsim-inputs-individual"><label>Height (150-750): <br/> <input id="height" type="text" value={height} onChange={this.onChangeHandler} ></input></label></div>
-                        <div className="customsim-inputs-individual"><label>Infection Duration (seconds): <br/> <input id="infectionDuration" type="text" value={infectionDuration} onChange={this.onChangeHandler} ></input></label></div>
-                        <div className="customsim-inputs-individual"><label>Lethality Rate (0-100%): <br/> <input id="lethalityRate" type="text" value={lethalityRate} onChange={this.onChangeHandler} ></input></label></div>
+                        <div className="customsim-inputs-individual"><label>Number Wearing Masks: <input id="number_masked_start" type="text" value={number_masked_start} onChange={this.onChangeHandler} className='customsim-input-box'></input></label></div>
+                        <div className="customsim-inputs-individual"><label>Infection Duration (seconds): <input id="infectionDuration" type="text" value={infectionDuration} onChange={this.onChangeHandler} className='customsim-input-box'></input></label></div>
+                        <div className="customsim-inputs-individual"><label>Lethality Rate (0-100%): <input id="lethalityRate" type="text" value={lethalityRate} onChange={this.onChangeHandler} className='customsim-input-box'></input></label></div>
                     </div>
-                    <div className="customsim-submit">
-                        <button onClick={this.onSubmit}>Run new sim</button>
-                    </div>
+                    <button className="customsim-startover-button" onClick={this.props.onClickHelper}> Start Over </button>
                 </div>
             </div>
             

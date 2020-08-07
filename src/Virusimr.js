@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import './Virusimr.css';
 import Page0 from './components/page0.js'
 import Page1 from './components/page1.js'
 import Page2 from './components/page2.js'
@@ -13,7 +13,7 @@ export default class Virusimr extends React.Component {
   constructor() {
     super()
     this.state = {
-      page: 2,
+      page: 0,
       interval: null
     }
 
@@ -34,12 +34,13 @@ export default class Virusimr extends React.Component {
       case 0:
         return(
           <div className="backdrop">
-            <div style={{
-            position: 'absolute', left: '50%', top: '50%',
-            transform: 'translate(-50%, -50%)'
-            }}>
-              <Page0 />
-              <button onClick={this._onClick} > Boop doop </button>
+            <div
+              style={{
+                height: '100vh',
+                width: '100%'
+              }}
+            >
+              <Page0 onClickHelper={this._onClick}/>
           </div>
           </div>
           
@@ -48,54 +49,47 @@ export default class Virusimr extends React.Component {
       case 1:
         return(
         <div className="backdrop">
-          <Page1 />
-          <button onClick={this._onClick} > Boop doop </button>
+          <Page1 onClickHelper={this._onClick}/>
         </div>
         )
 
       case 2:
         return(
         <div className="backdrop">
-          <Page2 />
-          <button onClick={this._onClick} > Boop doop </button>
+          <Page2 onClickHelper={this._onClick}/>
         </div>
         )
 
       case 3:
         return(
         <div className="backdrop">
-          <Page3 />
-          <button onClick={this._onClick} > Boop doop </button>
+          <Page3 onClickHelper={this._onClick}/>
         </div>
         )  
 
       case 4:
         return(
         <div className="backdrop">
-          <Page4 />
-          <button onClick={this._onClick} > Boop doop </button>
+          <Page4 onClickHelper={this._onClick}/>
         </div>
         )
 
       case 5:
         return(
         <div className="backdrop">
-          <Page5 />
-          <button onClick={this._onClick} > Boop doop </button>
+          <Page5 onClickHelper={this._onClick}/>
         </div>
         )
       case 6:
         return(
         <div className="backdrop">
-          <Page6 />
-          <button onClick={this._onClick} > Boop doop </button>
+          <Page6 onClickHelper={this._onClick}/>
         </div>
         )
       case 7:
         return(
         <div className="backdrop">
-          <CustomSim />
-          <button onClick={this._onClick} > Boop doop </button>
+          <CustomSim onClickHelper={this._onClick}/>
         </div>
         )
     }

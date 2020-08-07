@@ -38,7 +38,8 @@ export default class Virusim extends React.Component {
 
           //other
           time: 0,
-          dataStep: 1000,
+          publicTime: 0,
+          dataStep: 2500,
           
       }
     }
@@ -71,7 +72,7 @@ export default class Virusim extends React.Component {
     }
 
     componentDidMount() {
-        let { qt, timeStep, points, width, height, boundary, dot_radius, fps, time, dataStep,
+        let { qt, timeStep, points, width, height, boundary, dot_radius, fps, time, publicTime, dataStep,
               infectionDuration, lethalityRate } = this.state
         let intervalInt = setInterval(
             function() {
@@ -97,9 +98,16 @@ export default class Virusim extends React.Component {
                 this.setState({time: time})
             }.bind(this), dataStep)
 
+        let publicTimer = setInterval(
+            function() {
+                publicTime = publicTime + 1
+                this.setState({publicTime: publicTime})
+            }.bind(this), 1000)
+
         this.setState({
             interval: intervalInt,
-            timer: timer
+            timer: timer,
+            publicTimer: publicTimer
         })
     }
 
@@ -108,16 +116,18 @@ export default class Virusim extends React.Component {
         if (qt.count_inf <= 0) {
             clearInterval(this.state.interval)
             clearInterval(this.state.timer)
+            clearInterval(this.state.publicTimer)
         }
     }
 
     componentWillUnmount() {
         clearInterval(this.state.interval)
         clearInterval(this.state.timer)
+        clearInterval(this.state.publicTimer)
     }
 
     render() {
-        let { points, qt, time } = this.state
+        let { points, qt, time, publicTime } = this.state
         return(
             <>
                 <div className="grid">
@@ -132,10 +142,10 @@ export default class Virusim extends React.Component {
                         time={time}
                     /> 
                 </div>
-                <Counter
+                <Counter className="counter"
                     healthy={qt.count_not} inf={qt.count_inf} rec={qt.count_rec} 
                     dead={qt.count_dead} vac={qt.count_vac}
-                    time={time} 
+                    time={publicTime} 
                 />
             </>
         )

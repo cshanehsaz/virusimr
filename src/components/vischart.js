@@ -1,4 +1,5 @@
 import React from 'react'
+import './css/vischart.css'
 import {XYPlot, XAxis, YAxis, HorizontalGridLines, AreaSeries} from 'react-vis';
 
 export default class AreaChart extends React.PureComponent {
@@ -44,53 +45,51 @@ export default class AreaChart extends React.PureComponent {
       let { chealthy, cinf, crec, cdead, cvac, time } = this.state;
 
       return (
-        <XYPlot
-        width={400}
-        height={300}>
-        <HorizontalGridLines />
-        <AreaSeries
-            data={chealthy}
-            curve={'curveNatural'}
-            opacity={.4}
-            color={"#0AD48B"}
-        />
-        <AreaSeries
-            data={cinf}
-            curve={'curveNatural'}
-            opacity={.4}
-            color={"#C70039"}
-        />
-        <AreaSeries
-            data={crec}
-            curve={'curveNatural'}
-            opacity={.4}
-            color={"#004785"}
-        />
-        <AreaSeries
-            data={cdead}
-            curve={'curveNatural'}
-            opacity={.4}    
-            color={"#FF9933"}
-        />
-        <AreaSeries
-            data={cvac}
-            curve={'curveNatural'}
-            opacity={.4}   
-            color={"#C0C0C0"} 
-        />
-        <XAxis 
-            tickTotal={Math.min(5, time)}
-            style={{
-                text: {fontSize: '10pt'}}
-            }
-        />
-        <YAxis 
-            tickTotal={4}
-            style={{
-                text: {fontSize: '10pt'}}
-            }
-        />
-        </XYPlot>
+          <div className='vischart'>
+              <XYPlot
+                width={350}
+                height={273}>
+                <HorizontalGridLines />
+                <AreaSeries
+                    data={chealthy}
+                    curve={'curveNatural'}
+                    color={"#9deed1"}
+                />
+                <AreaSeries
+                    data={cinf}
+                    curve={'curveNatural'}
+                    
+                    color={"#e999b0"}
+                />
+                <AreaSeries
+                    data={crec}
+                    curve={'curveNatural'}
+                    color={"#99b5ce"}
+                />
+                <AreaSeries
+                    data={cdead}
+                    curve={'curveNatural'}    
+                    color={"#ffd6ad"}
+                />
+                <AreaSeries
+                    data={cvac}
+                    curve={'curveNatural'}   
+                    color={"#e6e6e6"} 
+                />
+                <XAxis 
+                    tickTotal={Math.min(5, time)}
+                    style={{
+                        text: {fontSize: '10pt', fill: 'white'},
+                    }}
+                />
+                <YAxis 
+                    tickTotal={4}
+                    style={{
+                        text: {fontSize: '10pt', fill: 'white'}}
+                    }
+                />
+                </XYPlot>
+          </div>
       );
     }
   }

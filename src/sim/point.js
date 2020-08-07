@@ -11,9 +11,6 @@ export default class Point {
         this.color = null;
         this.mask = false;
         this.updateColor()
-    
-        //this.color = color(Math.random()*255,Math.random()*255,Math.random()*255) //makes all random colors for testing
-
     }
 
     updateColor() {

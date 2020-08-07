@@ -13,7 +13,7 @@ export default class QuadTree {
         this.count_dead = 0;
         this.count_vac = 0;
         this.dot_radius = dot_radius;
-        this.mask_prob = .8;
+        this.mask_prob = .5;
         this.infectionDuration = infectionDuration;
         this.lethalityRate = lethalityRate;
     }
@@ -93,7 +93,6 @@ export default class QuadTree {
         if(p1.isInfected() || p2.isInfected()) {
             if(p1.isNotInfected() || p2.isNotInfected()) {
                 if(p1.isMasked() || p2.isMasked()) {
-                    console.log('mask!')
                     if(Math.random() < mask_prob) {
                         p1.infect();
                         p2.infect();
